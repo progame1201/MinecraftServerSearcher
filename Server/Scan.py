@@ -1,6 +1,5 @@
 import socket
 import threading
-import time
 from time import sleep
 import Utils
 import mcstatus
@@ -42,7 +41,7 @@ class Scan:
                 break
             threading.Thread(target=lambda: self.scan_ip(f"{latter}{i+1}{ip}", self.range.port_range)).start()
         while not self.stop:
-            time.sleep(1)
+            sleep(1)
         return True
 
     def scan_ip(self, ip, port_range):
