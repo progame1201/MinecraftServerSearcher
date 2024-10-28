@@ -1,3 +1,4 @@
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/progame1201/MinecraftServerSearcher/total)
 # 🇷🇺
 ## Minecraft Server Search
 это программа которая ищет Русские сервера майнкрафт которые хостятся на популярных или не очень хостингах.
