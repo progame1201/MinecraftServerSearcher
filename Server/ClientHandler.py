@@ -58,6 +58,12 @@ class ClientHandler:
         except Exception as ex:
             Log.error(ex)
             self._disconnect()
+    def scan_handler(self, scan_class, func):
+        if func():
+            for key in scans:
+                if scan_class in scans[key]:
+                    scans[key].remove(scan_class)
+
 
     def HandleObject(self, netobj: NetworkObject):
         try:
@@ -75,8 +81,11 @@ class ClientHandler:
                 if self.user in scans.keys():
                     if len(scans[self.user]) >= config.limit_by_user:
                         self.conn.send(Queue().serialize())
-                        return 
-                if len(list(scans.keys())) >= config.max_scans:
+                        return
+                total_scans = 0
+                for scans_list in scans.values():
+                    total_scans += len(scans_list)
+                if total_scans >= config.max_scans:
                     self.conn.send(Queue().serialize())
                     return
 
@@ -100,7 +109,7 @@ class ClientHandler:
                 if isinstance(method, Default):
                     scan.method = method
                     scan.range = range
-                    threading.Thread(target=lambda: scan.defautlScan()).start()
+                    threading.Thread(target=lambda: self.scan_handler(scan, scan.defaultScan)).start()
                 if self.user in scans.keys():
                     scans[self.user].append(scan)
                 else:

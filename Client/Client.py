@@ -91,6 +91,7 @@ class App(QMainWindow):
         self.save: QPushButton  # send admin settings
 
         self.Warn.hide()
+        self.connecting.hide()
         self.settings_hidden.hide()
 
         if config.admin_password == None:
