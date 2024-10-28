@@ -145,7 +145,7 @@ class App(QMainWindow):
 if __name__ == "__main__":
     sock = socket.socket()
     sock.connect((config.host.split(":")[0], int(config.host.split(":")[1])))
-    sock.send(Auth(config.passcode).serialize())
+    sock.send(Auth(config.password).serialize())
     methods: dict[str:list[str]] = NetworkObject.deserialize(sock.recv(4096 * 4)).methods
 
     app = QApplication(sys.argv)
