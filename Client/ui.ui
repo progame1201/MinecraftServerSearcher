@@ -269,8 +269,13 @@
        <height>21</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>name Regex pattern</string>
+      <string>motd Regex pattern</string>
      </property>
     </widget>
    </widget>
@@ -285,19 +290,6 @@
     </property>
     <property name="text">
      <string>settings is hidden</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="connecting">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>160</y>
-      <width>141</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Connecting...</string>
     </property>
    </widget>
   </widget>

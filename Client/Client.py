@@ -91,11 +91,10 @@ class App(QMainWindow):
         self.save: QPushButton  # send admin settings
 
         self.Warn.hide()
-        self.connecting.hide()
         self.settings_hidden.hide()
 
         if config.admin_password == None:
-            self.setting.hide()
+            self.settings.hide()
             self.settings_hidden.show()
 
         if not os.path.exists(config.path_to_minecraft_servers):
@@ -116,13 +115,10 @@ class App(QMainWindow):
         for range in methods[methods[text]]:
             self.Ranges.addItem(list(range.values())[0])
     def log(self, text):
-        try:
-            if len(self.status_box.toPlainText()) == 0:
-                self.status_box.setText(text)
-                return
-            self.status_box.setText(f"{self.status_box.toPlainText()}\n{text}")
-        except Exception as ex:
-            print(ex)
+        if len(self.status_box.toPlainText()) == 0:
+            self.status_box.setText(text)
+            return
+        self.status_box.setText(f"{self.status_box.toPlainText()}\n{text}")
 
     def start(self):
         try:
@@ -142,6 +138,7 @@ class App(QMainWindow):
             sock.send(AdminSettings(Filters(self.online.value(), self.nameregex.text(), self.ver.text(), float(self.scan_speed.text())), config.admin_password).serialize())
             self.log("Admin settings saved.")
         except Exception as ex:
+            print(ex)
             self.log(f"Please, enter a valid data to admin settings.\n{ex}")
 
 
@@ -150,8 +147,6 @@ if __name__ == "__main__":
     sock.connect((config.host.split(":")[0], int(config.host.split(":")[1])))
     sock.send(Auth(config.passcode).serialize())
     methods: dict[str:list[str]] = NetworkObject.deserialize(sock.recv(4096 * 4)).methods
-
-    #print(methods)
 
     app = QApplication(sys.argv)
     ex = App()

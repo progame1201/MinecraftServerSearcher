@@ -1,0 +1,3 @@
+nbtlib
+pyqt6
+mcstatus

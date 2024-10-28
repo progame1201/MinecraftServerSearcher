@@ -7,7 +7,7 @@ import ClientHandler
 sock = socket.socket()
 sock.bind((config.host.split(":")[0], int(config.host.split(":")[1]))) # ip, port
 sock.listen(10)
-
+Log.info(f"the server is bound to ip: {config.host}")
 while True:
     try:
         conn, addr = sock.accept()
